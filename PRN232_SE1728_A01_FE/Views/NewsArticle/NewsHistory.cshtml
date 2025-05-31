@@ -1,0 +1,52 @@
+﻿@model IEnumerable<PRN232_SE1728_A01_FE.Services.DTOs.NewsArticleDTO>;
+
+@{
+	ViewData["Title"] = "History";
+	Layout = "_SidebarLayout";
+}
+
+<h1 class="h2">
+	<i class="fa-solid fa-newspaper"></i>
+	News Article History
+</h1>
+</div>
+<div class="container">
+	@for (int i = 0; i < Model.Count();)
+	{
+		<div id="article" class="row">
+			@for (int j = 0; j < 3; j++)
+			{
+				if (i < Model.Count())
+				{
+					var article = Model.ElementAt(i);
+					<div class="col-4 hover-div">
+						<img class="imgarticle" src="https://i.pinimg.com/originals/e9/11/70/e91170f13c00f6484fc957d5429d8179.jpg" />
+						<br /><br />
+						<p style="font-weight: bold; color: #FFFFFF; font-size: 18px">@article.NewsTitle</p>
+						<p>Headline: @article.Headline</p>
+
+						<span>@article.CreatedDate?.ToString("HH:mm dd-MM-yyyy") | </span>
+						<span>By @article.CreatedBy</span><br />
+						<span>@article.ModifiedDate?.ToString("HH:mm dd-MM-yyyy") | </span>
+						<span>By @article.UpdatedBy</span>
+						<p><i class="fa-solid fa-link"></i> Source: @article.NewsSource</p>
+						<p>
+							<i class="fa-solid fa-tags"></i>
+							@foreach (var item in @article.Tags.ToList())
+							{
+								<span class="tag badge me-1 p-2">@item.TagName</span>
+							}
+						</p>
+						<a asp-controller="NewsArticle" asp-action="Detail" asp-route-id="@article.NewsArticleId" class="custom-btn detail-btn">
+
+							<i class="fa-solid fa-plus"></i> Detail
+						</a>
+					</div>
+				}
+				i++;
+			}
+		</div>
+	}
+
+
+</div>

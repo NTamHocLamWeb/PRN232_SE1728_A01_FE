@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - PRN232_SE1728_A01</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body>
+	<div class="container-scroller">
+		<div id="page" class="container-fluid page-body-wrapper pt-0">
+			<div class="row">
+				<!-- Sidebar -->
+				<nav id="sidebar" class="col-md-2 d-none d-md-block text-black sidebar">
+
+					@if (User.IsInRole("Admin"))
+					{
+						<div class="position-sticky">
+							<ul class="nav flex-column">
+								@{
+									var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+									var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+								}
+								<li class="nav-item">
+									<h1><i class="fa-solid fa-circle-user"></i></h1>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link @(currentController == "NewsArticle" && currentAction == "Index" ? "active" : "")"
+									   asp-area="" asp-controller="NewsArticle" asp-action="Index">
+										News Article
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link  @(currentController == "SystemAccount" && currentAction == "Index" ? "active" : "")"
+									   aria-current="page" asp-area="" asp-controller="SystemAccount" asp-action="Index">
+										Manage account
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" asp-area="" asp-controller="SystemAccount" asp-action="Logout">
+										Logout
+									</a>
+								</li>
+							</ul>
+						</div>
+
+					}
+					else
+					{
+						<div class="position-sticky">
+
+
+							<ul class="nav flex-column">
+								@{
+									var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+									var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+								}
+								<li class="nav-item">
+									<h1><i class="fa-solid fa-circle-user"></i></h1>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link @(currentController == "NewsArticle" && currentAction == "Index" ? "active" : "")"
+									   asp-area="" asp-controller="NewsArticle" asp-action="Index">
+										Manage news article
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link @(currentController == "SystemAccount" && currentAction == "Profile" ? "active" : "")"
+									   asp-area="" asp-controller="SystemAccount" asp-action="Profile">
+										Profile
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link @(currentController == "Category" && currentAction == "Index" ? "active" : "")"
+									   asp-area="" asp-controller="Category" asp-action="Index">
+										Manage category
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link @(currentController == "NewsArticle" && currentAction == "NewsHistory" ? "active" : "")"
+									   asp-area="" asp-controller="NewsArticle" asp-action="NewsHistory">
+										News History
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" asp-area="" asp-controller="SystemAccount" asp-action="Logout">
+										Logout
+									</a>
+								</li>
+							</ul>
+						</div>
+					}
+
+				</nav>
+
+				<!-- Main content -->
+				<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+					<div id="content" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+						@RenderBody()
+					</div>
+				</main>
+			</div>
+		</div>
+		<script src="~/lib/jquery/dist/jquery.min.js"></script>
+		<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="~/js/site.js" asp-append-version="true"></script>
+		<script>
+			document.getElementById('searchIcon').addEventListener('click', function () {
+				var input = document.getElementById('searchInput');
+				if (input.classList.contains('show')) {
+					input.classList.remove('show');
+					input.value = ''; // Xóa giá trị khi ẩn input
+				} else {
+					input.classList.add('show');
+					input.focus(); // Đặt tiêu điểm vào input khi hiển thị
+				}
+			});
+		</script>
+		@await RenderSectionAsync("Scripts", required: false)
+	</div>
+</body>
+</html>
+

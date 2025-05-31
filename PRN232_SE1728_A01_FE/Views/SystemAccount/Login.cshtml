@@ -1,0 +1,32 @@
+﻿@model PRN232_SE1728_A01_FE.Services.DTOs.SystemAccountDTO;
+@{
+	ViewData["Title"] = "Login";
+	Layout = "_LoginLayout";
+}
+<div class="row">
+	@Html.AntiForgeryToken()
+	<div id="login" class="col-6 text-center">
+		<a asp-controller="Home" asp-action="NewsArticle">Back to Home page</a>
+		<div class="col-6 login-box">
+
+			<p>Welcome back</p>
+			<form asp-controller="SystemAccount" asp-action="Login" method="post">
+				<input asp-for="AccountEmail" type="text" placeholder="Email" /><br />
+				<span asp-validation-for="AccountEmail" class="text-danger"></span>
+				<input asp-for="AccountPassword" type="text" placeholder="Password" /><br />
+				<span asp-validation-for="AccountPassword" class="text-danger"></span>
+				<input type="submit" name="Login" value="Login" />
+			</form>
+
+
+			<footer class="border-top footer text-muted">
+				<div>
+					&copy; 2025 - PRN232_A01 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<div id="login" class="col-6">
+		<img src="https://media.istockphoto.com/id/1402360271/de/vektor/nahtloses-muster-mit-einer-collage-aus-zeitungs-oder-zeitschriftenausschnitten.jpg?s=612x612&w=0&k=20&c=MjhRrEJfhw94R5nwezIz1-ax5Yms-vE41eDjoXIEbYc=" />
+	</div>
+</div>

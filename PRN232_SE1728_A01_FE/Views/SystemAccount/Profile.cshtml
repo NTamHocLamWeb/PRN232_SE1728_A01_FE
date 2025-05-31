@@ -1,0 +1,77 @@
+﻿@model PRN232_SE1728_A01_FE.Services.DTOs.SystemAccountDTO;
+@{
+	ViewData["Title"] = "Profile";
+	Layout = "_SidebarLayout";
+}
+<h1 class="h2">
+	<i class="fa-solid fa-circle-user"></i>
+	Profile
+</h1>
+</div>
+<div id="card" class="container">
+	<div class="row">
+		<div class="col-3"></div>
+		<div class="col-6 profile">
+			<input asp-for="AccountId" type="hidden" />
+			<div class="form-group">
+				<label asp-for="AccountName" class="control-label"></label>
+				<input asp-for="AccountName" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label asp-for="AccountEmail" class="control-label"></label>
+				<input asp-for="AccountEmail" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label asp-for="AccountPassword" class="control-label"></label>
+				<input asp-for="AccountPassword" class="form-control" />
+			</div>
+			<div class="form-group">
+				<a href="#" class="custom-btn edit-profile" data-bs-toggle="modal" data-bs-target="#updateProfileModal">
+					<i class="fa-solid fa-plus"></i> Update Profile
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Update Modal -->
+<div class="modal fade" id="updateProfileModal" tabindex="-1" aria-labelledby="updateProfileLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="background-color: #161717; color: white;">
+			<div class="modal-header" style="border-bottom: 1px solid white;">
+				<h5 class="modal-title" id="updateProfileLabel">Update Profile</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
+			</div>
+			<div class="modal-body">
+				<form id="updateProfileForm" asp-controller="SystemAccount" asp-action="UpdateProfile" method="post">
+					<input type="hidden" name="AccountId" value="@Model.AccountId" />
+					<input type="hidden" name="AccountRole" value="@Model.AccountRole" />
+
+					<div class="mb-3">
+						<label for="accountName" class="form-label">Name</label>
+						<input type="text" class="form-control text-white bg-dark" name="AccountName" value="@Model.AccountName" required />
+					</div>
+
+					<div class="mb-3">
+						<label for="accountEmail" class="form-label">Email</label>
+						<input type="email" class="form-control text-white bg-dark" name="AccountEmail" value="@Model.AccountEmail" required />
+					</div>
+
+					<div class="mb-3">
+						<label for="accountPassword" class="form-label">Password</label>
+						<input type="password" class="form-control text-white bg-dark" name="AccountPassword" value="@Model.AccountPassword" required />
+					</div>
+
+					<button type="submit" class="btn btn-primary">Save Changes</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function () {
+		$(".edit-profile").click(function () {
+			$("#updateProfileModal").modal("show");
+		});
+	});
+
+</script>

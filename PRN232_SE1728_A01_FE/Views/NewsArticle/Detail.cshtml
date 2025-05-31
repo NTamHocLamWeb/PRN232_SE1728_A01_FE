@@ -1,0 +1,35 @@
+﻿@model PRN232_SE1728_A01_FE.Services.DTOs.NewsArticleDTO;
+@{
+	ViewData["Title"] = Model.NewsTitle;
+}
+
+<div id="readnews" class="row">
+	<div class="col-2"></div>
+	<div class="col-8 paper">
+		<div class="card-subtitle">
+			<h1 class="text-center" style="color: #D9D9D9">@Model.NewsTitle</h1>
+			<h5>@Model.Headline</h5>
+			<span>Published: @Model.CreatedDate?.ToString("HH:mm dd-MM-yyyy") </span>
+			<span>| <i class="fa-solid fa-user"></i> By @Model.CreatedBy</span><br />
+			<span>Updated: @Model.ModifiedDate?.ToString("HH:mm dd-MM-yyyy") </span>
+			<span>| <i class="fa-solid fa-user"></i> By @Model.UpdatedBy</span><br />
+			<p>Category: @Model.CategoryName</p>
+			<p>Source: @Model.NewsSource</p>
+
+			@foreach (var item in Model.Tags)
+			{
+				<span class="tag badge me-1 p-2">@item.TagName</span>
+			}
+		</div>
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<p style="font-size: large">@Model.NewsContent</p>
+			</div>
+		</div>
+	</div>
+</div>
+<p style="text-align: center;">
+	<a asp-controller="NewsArticle" asp-action="Index">Back to Home Page</a>
+</p>
+
