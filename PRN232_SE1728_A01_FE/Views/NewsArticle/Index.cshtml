@@ -293,6 +293,39 @@
 
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script>
+			document.getElementById('createNewsForm').addEventListener('submit', function (e) {
+				const checkboxes = document.querySelectorAll('.tag-checkbox');
+				let atLeastOneChecked = false;
+
+				checkboxes.forEach(cb => {
+					if (cb.checked) {
+						atLeastOneChecked = true;
+					}
+				});
+
+				if (!atLeastOneChecked) {
+					e.preventDefault();
+					alert("Vui lòng chọn ít nhất một tag.");
+				}
+			});
+			document.getElementById('updateNewsForm').addEventListener('submit', function (e) {
+				const checkboxes = document.querySelectorAll('.tag-checkbox-update');
+				let atLeastOneChecked = false;
+
+				checkboxes.forEach(cb => {
+					if (cb.checked) {
+						atLeastOneChecked = true;
+					}
+				});
+
+				if (!atLeastOneChecked) {
+					e.preventDefault();
+					alert("Vui lòng chọn ít nhất một tag.");
+				}
+			});
+		</script>
+
+		<script>
 			$(document).ready(function () {
 				$(".create-news").click(function () {
 					$("#createNewsModal").modal("show");
